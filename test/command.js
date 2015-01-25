@@ -10,7 +10,7 @@ var it = lab.it;
 
 var internals = {
     defaults: {
-        dirPath: '.'
+        dirPath: process.cwd()
     }
 };
 
