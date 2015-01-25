@@ -1,0 +1,23 @@
+{
+  "name": "smelt",
+  "version": "0.0.1",
+  "description": "simple command utilities",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fishin/smelt"
+  },
+  "scripts": {
+    "test": "lab -a code -t 95 -v -m 60000",
+    "json": "lab -a code -r json -t 100 -o lab.json -m 60000"
+  },
+  "author": "Lloyd Benson",
+  "license": "MIT",
+  "dependencies": {
+    "hoek": "2.x.x"
+  },
+  "devDependencies": {
+    "code": "1.x.x",
+    "lab": "5.x.x"
+  }
+}
