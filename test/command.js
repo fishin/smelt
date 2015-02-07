@@ -20,35 +20,32 @@ describe('command', function () {
 
         var smelt = new Smelt(internals.defaults);
         var command = 'uptime';
-        smelt.runCommand(command, function(result) {
-
-            expect(result.status).to.equal('succeeded');
-            expect(result.stdout).to.exist();
-            done();
-        });
+        var result = smelt.runCommand(command);
+        //console.log(result);
+        expect(result.status).to.equal('succeeded');
+        expect(result.stdout).to.exist();
+        done();
     });
 
     it('runCommand invalid', function (done) {
 
         var smelt = new Smelt(internals.defaults);
         var command = 'invalid';
-        smelt.runCommand(command, function(result) {
-
-            expect(result.status).to.equal('failed');
-            expect(result.error).to.exist();
-            done();
-        });
+        var result = smelt.runCommand(command);
+        //console.log(result);
+        expect(result.status).to.equal('failed');
+        expect(result.error).to.exist();
+        done();
     });
 
     it('runCommand failed', function (done) {
 
         var smelt = new Smelt(internals.defaults);
         var command = 'ls lloyd';
-        smelt.runCommand(command, function(result) {
-
-            expect(result.status).to.equal('failed');
-            expect(result.stderr).to.exist();
-            done();
-        });
+        var result = smelt.runCommand(command);
+        //console.log(result);
+        expect(result.status).to.equal('failed');
+        expect(result.stderr).to.exist();
+        done();
     });
 });
