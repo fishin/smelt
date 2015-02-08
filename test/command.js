@@ -23,6 +23,7 @@ describe('command', function () {
         var result = smelt.runCommand(command);
         //console.log(result);
         expect(result.status).to.equal('succeeded');
+        expect(result.command).to.equal('uptime');
         expect(result.stdout).to.exist();
         done();
     });
@@ -34,6 +35,7 @@ describe('command', function () {
         var result = smelt.runCommand(command);
         //console.log(result);
         expect(result.status).to.equal('failed');
+        expect(result.command).to.equal('invalid');
         expect(result.error).to.exist();
         done();
     });
@@ -45,6 +47,7 @@ describe('command', function () {
         var result = smelt.runCommand(command);
         //console.log(result);
         expect(result.status).to.equal('failed');
+        expect(result.command).to.equal('ls lloyd');
         expect(result.stderr).to.exist();
         done();
     });
