@@ -28,7 +28,7 @@ describe('command', function () {
         done();
     });
 
-    it('runCommand invalid', function (done) {
+    it('runCommand invalid command', function (done) {
 
         var smelt = new Smelt(internals.defaults);
         var command = 'invalid';
@@ -37,6 +37,16 @@ describe('command', function () {
         expect(result.status).to.equal('failed');
         expect(result.command).to.equal('invalid');
         expect(result.error).to.exist();
+        done();
+    });
+
+    it('runCommand invalid path', function (done) {
+
+        var smelt = new Smelt({ dirPath: 'invalid' });
+        var command = 'invalid';
+        var result = smelt.runCommand(command);
+        //console.log(result);
+        expect(result.error).to.equal('invalid path: invalid');
         done();
     });
 
