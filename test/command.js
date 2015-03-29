@@ -14,7 +14,7 @@ var internals = {
     }
 };
 
-describe('command', function () {    
+describe('command', function () {
 
     it('runCommand valid', function (done) {
 
