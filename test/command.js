@@ -61,4 +61,16 @@ describe('command', function () {
         expect(result.stderr).to.exist();
         done();
     });
+
+    it('runSSHCommand', function (done) {
+
+        var smelt = new Smelt(internals.defaults);
+        var username = 'lloyd';
+        var host = 'localhost';
+        var command = 'date';
+        var result = smelt.runSSHCommand(username, host, command);
+        expect(result.status).to.equal('failed');
+        expect(result.stderr).to.exist();
+        done();
+    });
 });
