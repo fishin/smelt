@@ -1,6 +1,6 @@
 {
   "name": "smelt",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "simple command utilities for ficion",
   "main": "lib/index.js",
   "repository": {
