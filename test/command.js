@@ -8,19 +8,13 @@ var expect = Code.expect;
 var describe = lab.describe;
 var it = lab.it;
 
-var internals = {
-    defaults: {
-        dirPath: process.cwd()
-    }
-};
-
 describe('smelt', function () {
 
     it('runCommand valid', function (done) {
 
-        var smelt = new Smelt(internals.defaults);
+        var smelt = new Smelt({});
         var command = 'uptime';
-        smelt.runCommand(command, function (result) {
+        smelt.runCommand(command, smelt.settings.pids, function (result) {
 
             expect(result.status).to.equal('succeeded');
             expect(result.command).to.equal('uptime');
@@ -31,9 +25,9 @@ describe('smelt', function () {
 
     it('runCommand invalid command', function (done) {
 
-        var smelt = new Smelt(internals.defaults);
+        var smelt = new Smelt({});
         var command = 'invalid';
-        smelt.runCommand(command, function (result) {
+        smelt.runCommand(command, smelt.settings.pids, function (result) {
 
             expect(result.status).to.equal('failed');
             expect(result.command).to.equal('invalid');
@@ -46,7 +40,7 @@ describe('smelt', function () {
 
         var smelt = new Smelt({ dirPath: 'invalid' });
         var command = 'invalid';
-        smelt.runCommand(command, function (result) {
+        smelt.runCommand(command, smelt.settings.pids, function (result) {
 
             //console.log(result);
             expect(result.error).to.equal('invalid path: invalid');
@@ -56,9 +50,9 @@ describe('smelt', function () {
 
     it('runCommand failed', function (done) {
 
-        var smelt = new Smelt(internals.defaults);
+        var smelt = new Smelt({});
         var command = 'ls lloyd';
-        smelt.runCommand(command, function (result) {
+        smelt.runCommand(command, smelt.settings.pids, function (result) {
 
             //console.log(result);
             expect(result.status).to.equal('failed');
@@ -70,7 +64,7 @@ describe('smelt', function () {
 
     it('runCommandSync valid', function (done) {
 
-        var smelt = new Smelt(internals.defaults);
+        var smelt = new Smelt({});
         var command = 'uptime';
         var result = smelt.runCommandSync(command);
         //console.log(result);
@@ -82,7 +76,7 @@ describe('smelt', function () {
 
     it('runCommandSync invalid command', function (done) {
 
-        var smelt = new Smelt(internals.defaults);
+        var smelt = new Smelt({});
         var command = 'invalid';
         var result = smelt.runCommandSync(command);
         //console.log(result);
@@ -104,7 +98,7 @@ describe('smelt', function () {
 
     it('runCommandSync failed', function (done) {
 
-        var smelt = new Smelt(internals.defaults);
+        var smelt = new Smelt({});
         var command = 'ls lloyd';
         var result = smelt.runCommandSync(command);
         //console.log(result);
@@ -116,11 +110,11 @@ describe('smelt', function () {
 
     it('runSSHCommand', function (done) {
 
-        var smelt = new Smelt(internals.defaults);
+        var smelt = new Smelt({});
         var username = 'lloyd';
         var host = 'localhost';
         var command = 'date';
-        smelt.runSSHCommand(username, host, command, function (result) {
+        smelt.runSSHCommand(username, host, command, smelt.settings.pids, function (result) {
 
             expect(result.status).to.equal('failed');
             expect(result.stderr).to.exist();
@@ -130,7 +124,7 @@ describe('smelt', function () {
 
     it('runSSHCommandSync', function (done) {
 
-        var smelt = new Smelt(internals.defaults);
+        var smelt = new Smelt({});
         var username = 'lloyd';
         var host = 'localhost';
         var command = 'date';
