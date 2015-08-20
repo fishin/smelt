@@ -8,7 +8,7 @@ var expect = Code.expect;
 var describe = lab.describe;
 var it = lab.it;
 
-describe('smelt', function () {
+describe('command', function () {
 
     it('runCommand valid', function (done) {
 
