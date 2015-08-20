@@ -61,7 +61,20 @@ describe('command', function () {
             done();
         });
     });
+/*
+    it('runBashCommand', function (done) {
 
+        var smelt = new Smelt({});
+        var command = 'ls /tmp/*';
+        smelt.runBashCommand(command, smelt.settings.pids, function (result) {
+
+            console.log(result);
+            //expect(result.status).to.equal('failed');
+            expect(result.command).to.equal('bash -c "ls /tmp/*"');
+            done();
+        });
+    });
+*/
     it('runCommandSync valid', function (done) {
 
         var smelt = new Smelt({});
