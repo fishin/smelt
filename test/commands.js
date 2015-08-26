@@ -52,7 +52,7 @@ describe('commands', function () {
 
             expect(results.length).to.equal(1);
             expect(results[0].stdout).to.equal('');
-            expect(results[0].error).to.equal('/bin/sh: invalid: command not found\n');
+            expect(results[0].error).to.contain('invalid');
             expect(results[0].command).to.equal('invalid');
             expect(results[0].status).to.equal('failed');
             done();
