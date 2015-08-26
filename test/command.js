@@ -62,15 +62,28 @@ describe('command', function () {
         });
     });
 
-    it('runShellCommand', function (done) {
+    it('runShellCommand valid', function (done) {
 
         var smelt = new Smelt({});
         var command = 'ls lib/*';
         smelt.runShellCommand(command, smelt.settings.pids, function (result) {
 
-            console.log(result);
+            //console.log(result);
             expect(result.stdout).to.equal('lib/index.js\n');
             expect(result.status).to.equal('succeeded');
+            done();
+        });
+    });
+
+    it('runShellCommand invalid', function (done) {
+
+        var smelt = new Smelt({});
+        var command = 'invalid';
+        smelt.runShellCommand(command, smelt.settings.pids, function (result) {
+
+            //console.log(result);
+            expect(result.error).to.contain('invalid');
+            expect(result.status).to.equal('failed');
             done();
         });
     });
