@@ -14,6 +14,19 @@ describe('command', function () {
 
         var smelt = new Smelt({});
         var command = 'uptime';
+        smelt.runCommand(command, null, function (result) {
+
+            expect(result.status).to.equal('succeeded');
+            expect(result.command).to.equal('uptime');
+            expect(result.stdout).to.exist();
+            done();
+        });
+    });
+
+    it('runCommand valid', function (done) {
+
+        var smelt = new Smelt({});
+        var command = 'uptime';
         smelt.runCommand(command, smelt.settings.pids, function (result) {
 
             expect(result.status).to.equal('succeeded');
