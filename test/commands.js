@@ -14,7 +14,11 @@ describe('commands', function () {
 
         var smelt = new Smelt({});
         var commands = ['uptime', 'date'];
-        smelt.runCommands(commands, smelt.settings.pids, function (results) {
+        var options = {
+            commands: commands,
+            pidsObj: smelt.settings.pids
+        };
+        smelt.runCommands(options, function (results) {
 
             expect(results.length).to.equal(2);
             expect(results[0].stdout).to.exist();
@@ -31,7 +35,11 @@ describe('commands', function () {
 
         var smelt = new Smelt({});
         var commands = [['uptime', 'date']];
-        smelt.runCommands(commands, smelt.settings.pids, function (results) {
+        var options = {
+            commands: commands,
+            pidsObj: smelt.settings.pids
+        };
+        smelt.runCommands(options, function (results) {
 
             expect(results.length).to.equal(2);
             expect(results[0].stdout).to.exist();
@@ -48,7 +56,11 @@ describe('commands', function () {
 
         var smelt = new Smelt({});
         var commands = ['invalid'];
-        smelt.runCommands(commands, smelt.settings.pids, function (results) {
+        var options = {
+            commands: commands,
+            pidsObj: smelt.settings.pids
+        };
+        smelt.runCommands(options, function (results) {
 
             expect(results.length).to.equal(1);
             expect(results[0].stdout).to.equal('');
@@ -63,7 +75,11 @@ describe('commands', function () {
 
         var smelt = new Smelt({});
         var commands = ['sleep 1'];
-        smelt.runCommands(commands, smelt.settings.pids, function (results) {
+        var options = {
+            commands: commands,
+            pidsObj: smelt.settings.pids
+        };
+        smelt.runCommands(options, function (results) {
 
             expect(results.length).to.equal(1);
             expect(results[0].stdout).to.equal('');
