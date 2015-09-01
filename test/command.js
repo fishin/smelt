@@ -200,7 +200,7 @@ describe('command', function () {
         var smelt = new Smelt({});
         smelt.getCommandByPID(1, function (result) {
 
-            expect(result.command).to.equal('ps -h -q 1 -o command');
+            expect(result.command).to.equal('ps -h -p 1 -o command');
             //console.log(result.output);
             expect(result.output).to.exist();
             expect(result.error).to.equal('');
@@ -213,7 +213,7 @@ describe('command', function () {
         var smelt = new Smelt({});
         smelt.getCommandByPID(0, function (result) {
 
-            expect(result.command).to.equal('ps -h -q 0 -o command');
+            expect(result.command).to.equal('ps -h -p 0 -o command');
             expect(result.error).to.not.equal('');
             done();
         });
