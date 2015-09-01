@@ -184,6 +184,41 @@ describe('command', function () {
         });
     });
 
+    it('getProcesses', function (done) {
+
+        var smelt = new Smelt({});
+        smelt.getProcesses(function (processes) {
+
+            //console.log(processes);
+            expect(processes.length).to.be.above(0);
+            done();
+        });
+    });
+
+    it('getCommandByPID 1', function (done) {
+
+        var smelt = new Smelt({});
+        smelt.getCommandByPID(1, function (result) {
+
+            expect(result.command).to.equal('ps -h -q 1 -o command');
+            //console.log(result.output);
+            expect(result.output).to.exist();
+            expect(result.error).to.equal('');
+            done();
+        });
+    });
+
+    it('getCommandByPID 0', function (done) {
+
+        var smelt = new Smelt({});
+        smelt.getCommandByPID(0, function (result) {
+
+            expect(result.command).to.equal('ps -h -q 0 -o command');
+            expect(result.error).to.not.equal('');
+            done();
+        });
+    });
+
     it('runSSHCommandSync', function (done) {
 
         var smelt = new Smelt({});
