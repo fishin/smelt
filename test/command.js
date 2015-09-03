@@ -109,64 +109,6 @@ describe('command', function () {
         });
     });
 
-    it('runCommandSync valid', function (done) {
-
-        var smelt = new Smelt({});
-        var command = 'uptime';
-        var options = {
-            command: command
-        };
-        var result = smelt.runCommandSync(options);
-        //console.log(result);
-        expect(result.status).to.equal('succeeded');
-        expect(result.command).to.equal('uptime');
-        expect(result.stdout).to.exist();
-        done();
-    });
-
-    it('runCommandSync invalid command', function (done) {
-
-        var smelt = new Smelt({});
-        var command = 'invalid';
-        var options = {
-            command: command
-        };
-        var result = smelt.runCommandSync(options);
-        //console.log(result);
-        expect(result.status).to.equal('failed');
-        expect(result.command).to.equal('invalid');
-        expect(result.error).to.exist();
-        done();
-    });
-
-    it('runCommandSync invalid path', function (done) {
-
-        var smelt = new Smelt({ dirPath: 'invalid' });
-        var command = 'invalid';
-        var options = {
-            command: command
-        };
-        var result = smelt.runCommandSync(options);
-        //console.log(result);
-        expect(result.error).to.equal('invalid path: invalid');
-        done();
-    });
-
-    it('runCommandSync failed', function (done) {
-
-        var smelt = new Smelt({});
-        var command = 'ls lloyd';
-        var options = {
-            command: command
-        };
-        var result = smelt.runCommandSync(options);
-        //console.log(result);
-        expect(result.status).to.equal('failed');
-        expect(result.command).to.equal('ls lloyd');
-        expect(result.stderr).to.exist();
-        done();
-    });
-
     it('runSSHCommand', function (done) {
 
         var smelt = new Smelt({});
@@ -217,19 +159,5 @@ describe('command', function () {
             expect(result.error).to.not.equal('');
             done();
         });
-    });
-
-    it('runSSHCommandSync', function (done) {
-
-        var smelt = new Smelt({});
-        var options = {
-            username: 'lloyd',
-            host: 'localhost',
-            command: 'date'
-        };
-        var result = smelt.runSSHCommandSync(options);
-        expect(result.status).to.equal('failed');
-        expect(result.stderr).to.exist();
-        done();
     });
 });
