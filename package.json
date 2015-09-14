@@ -8,7 +8,7 @@
     "url": "https://github.com/fishin/smelt"
   },
   "engines": {
-    "node": ">=0.10.x"
+    "node": ">=4"
   },
   "scripts": {
     "clean": "rm -rf node_modules",
