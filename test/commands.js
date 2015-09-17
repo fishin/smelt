@@ -97,4 +97,25 @@ describe('commands', function () {
             process.kill(smelt.settings.pids[0]);
         }, 200);
     });
+
+    it('runCommands return all commands', function (done) {
+
+        var smelt = new Smelt({});
+        var commands = ['invalid', 'uptime'];
+        var options = {
+            commands: commands,
+            pidsObj: smelt.settings.pids
+        };
+        smelt.runCommands(options, function (err, results) {
+
+            expect(err).to.exist();
+            expect(results.length).to.equal(2);
+            expect(results[0].stdout).to.equal('');
+            expect(results[0].error).to.contain('ENOENT');
+            expect(results[0].command).to.equal('invalid');
+            expect(results[0].status).to.equal('failed');
+            expect(results[1].command).to.equal('uptime');
+            done();
+        });
+    });
 });
