@@ -18,9 +18,10 @@ describe('commands', function () {
             commands: commands,
             pidsObj: smelt.settings.pids
         };
-        smelt.runCommands(options, function (results) {
+        smelt.runCommands(options, function (err, results) {
 
             expect(results.length).to.equal(2);
+            expect(err).to.not.exist();
             expect(results[0].stdout).to.exist();
             expect(results[0].command).to.equal('uptime');
             expect(results[0].status).to.equal('succeeded');
@@ -39,8 +40,9 @@ describe('commands', function () {
             commands: commands,
             pidsObj: smelt.settings.pids
         };
-        smelt.runCommands(options, function (results) {
+        smelt.runCommands(options, function (err, results) {
 
+            expect(err).to.not.exist();
             expect(results.length).to.equal(2);
             expect(results[0].stdout).to.exist();
             expect(results[0].command).to.equal('uptime');
@@ -60,8 +62,9 @@ describe('commands', function () {
             commands: commands,
             pidsObj: smelt.settings.pids
         };
-        smelt.runCommands(options, function (results) {
+        smelt.runCommands(options, function (err, results) {
 
+            expect(err).to.exist();
             expect(results.length).to.equal(1);
             expect(results[0].stdout).to.equal('');
             expect(results[0].error).to.contain('ENOENT');
@@ -79,8 +82,9 @@ describe('commands', function () {
             commands: commands,
             pidsObj: smelt.settings.pids
         };
-        smelt.runCommands(options, function (results) {
+        smelt.runCommands(options, function (err, results) {
 
+            expect(err).to.exist();
             expect(results.length).to.equal(1);
             expect(results[0].stdout).to.equal('');
             expect(results[0].signal).to.equal('SIGTERM');
