@@ -86,7 +86,7 @@ describe('command', function () {
         smelt.runShellCommand(options, function (result) {
 
             //console.log(result);
-            expect(result.stdout).to.equal('lib/index.js\n');
+            expect(result.stdout).to.equal('lib/index.js');
             expect(result.status).to.equal('succeeded');
             done();
         });
