@@ -1,24 +1,26 @@
-var Code = require('code');
-var Lab = require('lab');
+'use strict';
 
-var Smelt = require('../lib/index');
+const Code = require('code');
+const Lab = require('lab');
 
-var lab = exports.lab = Lab.script();
-var expect = Code.expect;
-var describe = lab.describe;
-var it = lab.it;
+const Smelt = require('../lib/index');
 
-describe('commands', function () {
+const lab = exports.lab = Lab.script();
+const expect = Code.expect;
+const describe = lab.describe;
+const it = lab.it;
 
-    it('runCommands', function (done) {
+describe('commands', () => {
 
-        var smelt = new Smelt({});
-        var commands = ['uptime', 'date'];
-        var options = {
+    it('runCommands', (done) => {
+
+        const smelt = new Smelt({});
+        const commands = ['uptime', 'date'];
+        const options = {
             commands: commands,
             pidsObj: smelt.settings.pids
         };
-        smelt.runCommands(options, function (err, results) {
+        smelt.runCommands(options, (err, results) => {
 
             expect(results.length).to.equal(2);
             expect(err).to.not.exist();
@@ -32,15 +34,15 @@ describe('commands', function () {
         });
     });
 
-    it('runCommands parallel', function (done) {
+    it('runCommands parallel', (done) => {
 
-        var smelt = new Smelt({});
-        var commands = [['uptime', 'date']];
-        var options = {
+        const smelt = new Smelt({});
+        const commands = [['uptime', 'date']];
+        const options = {
             commands: commands,
             pidsObj: smelt.settings.pids
         };
-        smelt.runCommands(options, function (err, results) {
+        smelt.runCommands(options, (err, results) => {
 
             expect(err).to.not.exist();
             expect(results.length).to.equal(2);
@@ -54,15 +56,15 @@ describe('commands', function () {
         });
     });
 
-    it('runCommands invalid', function (done) {
+    it('runCommands invalid', (done) => {
 
-        var smelt = new Smelt({});
-        var commands = ['invalid'];
-        var options = {
+        const smelt = new Smelt({});
+        const commands = ['invalid'];
+        const options = {
             commands: commands,
             pidsObj: smelt.settings.pids
         };
-        smelt.runCommands(options, function (err, results) {
+        smelt.runCommands(options, (err, results) => {
 
             expect(err).to.exist();
             expect(results.length).to.equal(1);
@@ -74,15 +76,15 @@ describe('commands', function () {
         });
     });
 
-    it('runCommands signal', function (done) {
+    it('runCommands signal', (done) => {
 
-        var smelt = new Smelt({});
-        var commands = ['sleep 1'];
-        var options = {
+        const smelt = new Smelt({});
+        const commands = ['sleep 1'];
+        const options = {
             commands: commands,
             pidsObj: smelt.settings.pids
         };
-        smelt.runCommands(options, function (err, results) {
+        smelt.runCommands(options, (err, results) => {
 
             expect(err).to.exist();
             expect(results.length).to.equal(1);
@@ -92,21 +94,21 @@ describe('commands', function () {
             expect(results[0].status).to.equal('failed');
             done();
         });
-        setTimeout(function () {
+        setTimeout(() => {
 
             process.kill(smelt.settings.pids[0]);
         }, 200);
     });
 
-    it('runCommands return all commands', function (done) {
+    it('runCommands return all commands', (done) => {
 
-        var smelt = new Smelt({});
-        var commands = ['invalid', 'uptime'];
-        var options = {
+        const smelt = new Smelt({});
+        const commands = ['invalid', 'uptime'];
+        const options = {
             commands: commands,
             pidsObj: smelt.settings.pids
         };
-        smelt.runCommands(options, function (err, results) {
+        smelt.runCommands(options, (err, results) => {
 
             expect(err).to.exist();
             expect(results.length).to.equal(2);

@@ -1,33 +1,22 @@
-var Code = require('code');
-var Lab = require('lab');
+'use strict';
 
-var Smelt = require('../lib/index');
+const Code = require('code');
+const Lab = require('lab');
 
-var lab = exports.lab = Lab.script();
-var expect = Code.expect;
-var describe = lab.describe;
-var it = lab.it;
+const Smelt = require('../lib/index');
 
-describe('command', function () {
+const lab = exports.lab = Lab.script();
+const expect = Code.expect;
+const describe = lab.describe;
+const it = lab.it;
 
-    it('runCommand valid', function (done) {
+describe('command', () => {
 
-        var smelt = new Smelt({});
-        var command = 'uptime';
-        smelt.runCommand(command, null, function (result) {
+    it('runCommand valid', (done) => {
 
-            expect(result.status).to.equal('succeeded');
-            expect(result.command).to.equal('uptime');
-            expect(result.stdout).to.exist();
-            done();
-        });
-    });
-
-    it('runCommand valid', function (done) {
-
-        var smelt = new Smelt({});
-        var command = 'uptime';
-        smelt.runCommand(command, smelt.settings.pids, function (result) {
+        const smelt = new Smelt({});
+        const command = 'uptime';
+        smelt.runCommand(command, null, (result) => {
 
             expect(result.status).to.equal('succeeded');
             expect(result.command).to.equal('uptime');
@@ -36,11 +25,24 @@ describe('command', function () {
         });
     });
 
-    it('runCommand invalid command', function (done) {
+    it('runCommand valid', (done) => {
 
-        var smelt = new Smelt({});
-        var command = 'invalid';
-        smelt.runCommand(command, smelt.settings.pids, function (result) {
+        const smelt = new Smelt({});
+        const command = 'uptime';
+        smelt.runCommand(command, smelt.settings.pids, (result) => {
+
+            expect(result.status).to.equal('succeeded');
+            expect(result.command).to.equal('uptime');
+            expect(result.stdout).to.exist();
+            done();
+        });
+    });
+
+    it('runCommand invalid command', (done) => {
+
+        const smelt = new Smelt({});
+        const command = 'invalid';
+        smelt.runCommand(command, smelt.settings.pids, (result) => {
 
             expect(result.status).to.equal('failed');
             expect(result.command).to.equal('invalid');
@@ -49,11 +51,11 @@ describe('command', function () {
         });
     });
 
-    it('runCommand invalid path', function (done) {
+    it('runCommand invalid path', (done) => {
 
-        var smelt = new Smelt({ dirPath: 'invalid' });
-        var command = 'invalid';
-        smelt.runCommand(command, smelt.settings.pids, function (result) {
+        const smelt = new Smelt({ dirPath: 'invalid' });
+        const command = 'invalid';
+        smelt.runCommand(command, smelt.settings.pids, (result) => {
 
             //console.log(result);
             expect(result.error).to.equal('invalid path: invalid');
@@ -61,11 +63,11 @@ describe('command', function () {
         });
     });
 
-    it('runCommand failed', function (done) {
+    it('runCommand failed', (done) => {
 
-        var smelt = new Smelt({});
-        var command = 'ls lloyd';
-        smelt.runCommand(command, smelt.settings.pids, function (result) {
+        const smelt = new Smelt({});
+        const command = 'ls lloyd';
+        smelt.runCommand(command, smelt.settings.pids, (result) => {
 
             //console.log(result);
             expect(result.status).to.equal('failed');
@@ -75,15 +77,15 @@ describe('command', function () {
         });
     });
 
-    it('runShellCommand valid', function (done) {
+    it('runShellCommand valid', (done) => {
 
-        var smelt = new Smelt({});
-        var command = 'ls lib/*';
-        var options = {
+        const smelt = new Smelt({});
+        const command = 'ls lib/*';
+        const options = {
             command: command,
             pidObj: smelt.settings.pids
         };
-        smelt.runShellCommand(options, function (result) {
+        smelt.runShellCommand(options, (result) => {
 
             //console.log(result);
             expect(result.stdout).to.equal('lib/index.js');
@@ -92,15 +94,15 @@ describe('command', function () {
         });
     });
 
-    it('runShellCommand invalid', function (done) {
+    it('runShellCommand invalid', (done) => {
 
-        var smelt = new Smelt({});
-        var command = 'invalid';
-        var options = {
+        const smelt = new Smelt({});
+        const command = 'invalid';
+        const options = {
             command: command,
             pidObj: smelt.settings.pids
         };
-        smelt.runShellCommand(options, function (result) {
+        smelt.runShellCommand(options, (result) => {
 
             //console.log(result);
             expect(result.error).to.contain('invalid');
@@ -109,16 +111,16 @@ describe('command', function () {
         });
     });
 
-    it('runSSHCommand', function (done) {
+    it('runSSHCommand', (done) => {
 
-        var smelt = new Smelt({});
-        var options = {
+        const smelt = new Smelt({});
+        const options = {
             username: 'lloyd',
             host: 'localhost',
             command: 'date',
             pidsObj: smelt.settings.pids
         };
-        smelt.runSSHCommand(options, function (result) {
+        smelt.runSSHCommand(options, (result) => {
 
             expect(result.status).to.equal('failed');
             expect(result.stderr).to.exist();
@@ -126,10 +128,10 @@ describe('command', function () {
         });
     });
 
-    it('getProcesses', function (done) {
+    it('getProcesses', (done) => {
 
-        var smelt = new Smelt({});
-        smelt.getProcesses(function (processes) {
+        const smelt = new Smelt({});
+        smelt.getProcesses((processes) => {
 
             //console.log(processes);
             expect(processes.length).to.be.above(0);
@@ -137,10 +139,10 @@ describe('command', function () {
         });
     });
 
-    it('getCommandByPID 1', function (done) {
+    it('getCommandByPID 1', (done) => {
 
-        var smelt = new Smelt({});
-        smelt.getCommandByPID(1, function (result) {
+        const smelt = new Smelt({});
+        smelt.getCommandByPID(1, (result) => {
 
             expect(result.command).to.equal('ps -h -p 1 -o command');
             //console.log(result.output);
@@ -150,10 +152,10 @@ describe('command', function () {
         });
     });
 
-    it('getCommandByPID 0', function (done) {
+    it('getCommandByPID 0', (done) => {
 
-        var smelt = new Smelt({});
-        smelt.getCommandByPID(0, function (result) {
+        const smelt = new Smelt({});
+        smelt.getCommandByPID(0, (result) => {
 
             expect(result.command).to.equal('ps -h -p 0 -o command');
             expect(result.error).to.not.equal('');
